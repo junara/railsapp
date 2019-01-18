@@ -1,24 +1,43 @@
 # README
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+* 説明
+  * Dockerで動くRails
+  * commitの差分を追うとDocker使うための準備がわかります。
+  * webpackerの導入はしていません。
 
-Things you may want to cover:
+* 事前準備
+  * Dockerがインストールされている
+  * 以下のサイトからインストールできます。
+    * [Docker Desktop (Mac)](https://hub.docker.com/editions/community/docker-ce-desktop-mac)
 
-* Ruby version
+# 手順
 
-* System dependencies
+railsを起動するまでの手順
 
-* Configuration
+* Dockerをbuildする。（railsが入ったimageが作成されます）
+```console
+> docker-compose build
+```
 
-* Database creation
+* Dockerとtdb （postgresql）を起動する。（上記で作ったimageからrailsを起動するとともに、データベースサーバーも起動します）
 
-* Database initialization
+```console
+> docker-compose up -d
+```
 
-* How to run the test suite
+* （Dockerとは関係無いけど）DBを初期化する
 
-* Services (job queues, cache servers, search engines, etc.)
+```aidl
+> docker-compose exec web rails db:migrate:reset
+```
 
-* Deployment instructions
+# 検証
 
-* ...
+[localhost:3000](http://localhost:3000)にアクセスして接続されれば成功です。
+
+# 終了方法
+
+```aidl
+> docker-compose exrc web down
+```
+
